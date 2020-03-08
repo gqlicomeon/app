@@ -1,3 +1,6 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
 module.exports = {
     lintOnSave: false,//关闭eslint
     outputDir:"../../backend/static/blog",
@@ -42,5 +45,26 @@ module.exports = {
             // 提取出来的通用 chunk 和 vendor chunk。
             //   chunks: ['chunk-vendors', 'chunk-common', 'index']
         }
+    },
+    configureWebpack: {
+        plugins: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                  compress: {
+                    drop_debugger: true,
+                    drop_console: true
+                  }
+                },
+                sourceMap: false,
+                parallel: true
+            }),
+            // 配置compression-webpack-plugin压缩
+            new CompressionWebpackPlugin({
+                algorithm: 'gzip',
+                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                threshold: 10240,
+                minRatio: 0.8
+            })
+        ]
     }
 }
