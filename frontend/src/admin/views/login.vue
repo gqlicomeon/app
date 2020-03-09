@@ -45,7 +45,7 @@
                 });
                 return;
             }
-            axios.post("/login",{name,password}).then(res=>{
+            axios.post("/api/login",{name,password}).then(res=>{
                 if(res.data && res.data.result === 1){
                     this.$message({
                         type: "success",
@@ -61,7 +61,7 @@
             })
           },
           autoLogin(){
-              axios.post("/login").then(res=>{
+              axios.post("/api/login").then(res=>{
                   if(res.data && res.data.result === 1){
                       this.$router.push("/home");
                   }

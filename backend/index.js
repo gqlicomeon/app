@@ -1,6 +1,6 @@
 const koa = require("koa");
 const session = require('koa-session');
-const serve = require("koa-static");
+// const serve = require("koa-static");
 const koaBody = require('koa-body');
 const path = require("path");
 const app = new koa();
@@ -29,8 +29,8 @@ app.use(session(CONFIG, app));
 //路由
 const router = require("./router");
 
-//静态服务
-app.use(serve("./static"));
+//静态服务，改为使用nginx提供静态服务
+// app.use(serve("./static"));
 //bodyparser
 app.use(koaBody({
     multipart:true, // 支持文件上传
@@ -58,4 +58,4 @@ app.use(async ctx=>{
 })
 
 app.listen(3000);
-console.log("server has on");
+console.log("server has on 80");

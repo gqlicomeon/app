@@ -19,6 +19,7 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.13.1",
     "koa-static": "^5.0.0",
-    "mongodb": "^3.4.1"
+    "mongodb": "^3.4.1",
+    "pm2": "^4.2.3"
   }
 }

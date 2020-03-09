@@ -47,7 +47,7 @@ export default {
             })
         },
         checkIfLogin(){
-            axios.post("/login").then(res=>{
+            axios.post("/api/login").then(res=>{
                 if(!res.data || res.data.result !== 1){
                     this.$router.push("/login");
                 }

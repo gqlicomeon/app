@@ -59,7 +59,7 @@ export default {
                 });
                 return;
             }
-            axios.post("/delete",{name}).then(res=>{
+            axios.post("/api/delete",{name}).then(res=>{
                 let data = res.data || {};
                 if(data.result == 1){
                     this.list.splice(index,1);

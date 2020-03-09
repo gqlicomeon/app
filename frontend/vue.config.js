@@ -4,7 +4,7 @@ const productionGzipExtensions = ['js', 'css']
 module.exports = {
     lintOnSave: false,//关闭eslint
     outputDir:"../../backend/static/blog",
-    publicPath:"/blog/",
+    publicPath:"/",
     assetsDir:"assets",
     productionSourceMap:false,
     pwa:{

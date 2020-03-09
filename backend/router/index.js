@@ -6,82 +6,7 @@ const router = new Router();
 //数据库链接
 const url = "mongodb://localhost:27017/";
 router
-//处理后台接口
-.post('/login/',async ctx=>{
-    let {name,password} = ctx.request.body;
-    //设置白名单账户
-    let defaultUser = {
-        gqli:"ooo.000"
-    };
-    if(!ctx.session.loged){//session管理
-      ctx.session.loged = false;
-      if(!name || !password){
-        ctx.body = {
-          result:-1,
-          msg:"用户名或密码不能为空"
-        }
-      }
-      if(Object.keys(defaultUser).includes(name)){//用户名在白名单账户中
-          if(defaultUser[name] === password){
-            //登录成功
-            ctx.session.loged = true;
-            ctx.body = {
-              result:1,
-              msg:"登录成功"
-            }
-          }else{
-            //密码不正确
-            ctx.body = {
-              result:-2,
-              msg:"密码不正确"
-            }
-          }
-      }else{//查数据库
-        let res = await new Promise((resolve,reject)=>{
-          MongoClient.connect(url, { useUnifiedTopology: true }).then(db=>{
-            var blogDb = db.db("blog");
-            blogDb.collection("user").find({name}).toArray(function(err, result){ // 返回集合中所有数据
-              if (err) reject(err);
-              db.close();
-              resolve(result)
-            })
-          }).catch(err=>{
-            reject(err)
-          });
-        }).catch(error=>{
-            ctx.body = {
-              result:-3,
-              msg:new Error(error).message
-            };
-        })
-        if(res.length === 0){//没找到用户
-          ctx.body = {
-            result:-4,
-            msg:"用户不存在"
-          };
-        }else{
-          let trueUser = res[0];
-          if(trueUser.password === password){//数据查询结果正确
-            ctx.session.loged = true;
-            ctx.body = {
-              result:1,
-              msg:"登录成功"
-            }
-          }else{
-            ctx.body = {
-              result:-2,
-              msg:"密码不正确"
-            }
-          }
-        }
-      }
-    }else{
-      ctx.body = {
-        result:1,
-        msg:"登录成功"
-      }
-    }
-})
+
 //处理文件上传
 .post('/upload/',async ctx =>{
     let file = ctx.request.files.file || {};
@@ -93,7 +18,7 @@ router
     ctx.body = res;
 })
 //处理上传删除
-.post('/delete/',async ctx=>{
+.post('/api/delete/',async ctx=>{
   let body = ctx.request.body || {};
   let name = body.name;
   let deletePath = path.join(__dirname,"../static/upload/",name);
@@ -121,6 +46,82 @@ router
       msg:`${name} is not exist`
     }
   } 
+})
+//处理后台登录
+.post('/api/login/',async ctx=>{
+  let {name,password} = ctx.request.body;
+  //设置白名单账户
+  let defaultUser = {
+      gqli:"ooo.000"
+  };
+  if(!ctx.session.loged){//session管理
+    ctx.session.loged = false;
+    if(!name || !password){
+      ctx.body = {
+        result:-1,
+        msg:"用户名或密码不能为空"
+      }
+    }
+    if(Object.keys(defaultUser).includes(name)){//用户名在白名单账户中
+        if(defaultUser[name] === password){
+          //登录成功
+          ctx.session.loged = true;
+          ctx.body = {
+            result:1,
+            msg:"登录成功"
+          }
+        }else{
+          //密码不正确
+          ctx.body = {
+            result:-2,
+            msg:"密码不正确"
+          }
+        }
+    }else{//查数据库
+      let res = await new Promise((resolve,reject)=>{
+        MongoClient.connect(url, { useUnifiedTopology: true }).then(db=>{
+          var blogDb = db.db("blog");
+          blogDb.collection("user").find({name}).toArray(function(err, result){ // 返回集合中所有数据
+            if (err) reject(err);
+            db.close();
+            resolve(result)
+          })
+        }).catch(err=>{
+          reject(err)
+        });
+      }).catch(error=>{
+          ctx.body = {
+            result:-3,
+            msg:new Error(error).message
+          };
+      })
+      if(res.length === 0){//没找到用户
+        ctx.body = {
+          result:-4,
+          msg:"用户不存在"
+        };
+      }else{
+        let trueUser = res[0];
+        if(trueUser.password === password){//数据查询结果正确
+          ctx.session.loged = true;
+          ctx.body = {
+            result:1,
+            msg:"登录成功"
+          }
+        }else{
+          ctx.body = {
+            result:-2,
+            msg:"密码不正确"
+          }
+        }
+      }
+    }
+  }else{
+    ctx.body = {
+      result:1,
+      msg:"登录成功"
+    }
+  }
 })
 //新增文章
 .post('/api/article/add',async ctx=>{
