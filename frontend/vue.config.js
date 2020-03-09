@@ -3,7 +3,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
 module.exports = {
     lintOnSave: false,//关闭eslint
-    outputDir:"../../backend/static/blog",
+    outputDir:"../backend/static/blog",
     publicPath:"/",
     assetsDir:"assets",
     productionSourceMap:false,
