@@ -56,4 +56,4 @@ app.use(async ctx=>{
 })
 
 app.listen(3000);
-console.log("server has on 80");
+console.log("server has on 3000");
