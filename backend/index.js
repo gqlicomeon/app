@@ -1,6 +1,7 @@
 const koa = require("koa");
 const session = require('koa-session');
 const koaBody = require('koa-body');
+const koaStatic = require('koa-static');
 const path = require("path");
 const app = new koa();
 //session配置，处理登录状态
@@ -24,7 +25,7 @@ const CONFIG = {
 app.use(session(CONFIG, app));
 // or if you prefer all default config, just use => app.use(session(app));
 
-
+app.use(koaStatic('./static/upload'));
 //路由
 const router = require("./router");
 
