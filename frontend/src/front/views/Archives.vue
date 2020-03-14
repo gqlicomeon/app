@@ -62,7 +62,10 @@ export default {
     computed: {
         archivesList(){
             return this.articleList.reduce((acc,val)=>{
-                let [year,month,day] = val.cTime.split(/-|\/|\\/);
+                let date = new Date(val.timestamp);
+		let year = date.getFullYear();
+                let month = date.getMonth();
+                let day = date.getDate();
                 if(!acc[year]){
                     acc[year] = [];
                 }

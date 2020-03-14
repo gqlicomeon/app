@@ -7,8 +7,9 @@ const router = new Router();
 const url = "mongodb://localhost:27017/";
 router
 //处理文件上传
-.post('/upload/',async ctx =>{
+.post('/api/upload/',async ctx =>{
     let file = ctx.request.files.file || {};
+	console.log(file);
     let res = {
         result:1,
         msg:"success",

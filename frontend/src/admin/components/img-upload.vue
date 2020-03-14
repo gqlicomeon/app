@@ -16,7 +16,7 @@
         </li>
         <li>
             <el-upload
-                action="/upload"
+                action="/api/upload/"
                 list-type="picture-card"
                 accept="image/*"
                 :show-file-list="false"
