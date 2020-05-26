@@ -12,7 +12,7 @@
     <div class="my-blog">
       <h2>About Blog</h2>
       <ul>
-        <li>初衷：搭建一个可以记录自己日常学习和工作点滴的地方</li>
+        <li>一个记录学习工作点滴的空间</li>
         <li>实现：前端Vue+后端NodeJs</li>
       </ul>
     </div>

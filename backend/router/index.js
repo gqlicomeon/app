@@ -9,7 +9,6 @@ router
 //处理文件上传
 .post('/api/upload/',async ctx =>{
     let file = ctx.request.files.file || {};
-	console.log(file);
     let res = {
         result:1,
         msg:"success",
@@ -280,8 +279,8 @@ router
       let {tags} = val;
       return tags.includes(tag);
     }).map(val=>{
-      let { title,desc,timestamp,cTime} = val;
-      return {title,desc,timestamp,cTime};
+      let { title,desc,timestamp,cTime,coverImg} = val;
+      return {title,desc,timestamp,cTime,coverImg};
     })
     ctx.body = {
       result:1,

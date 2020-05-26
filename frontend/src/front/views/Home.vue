@@ -130,11 +130,17 @@
         position: relative;
         margin-bottom: 10px;
         border-radius: 5px;
+        a{
+	 display:inline-block;
+         width:100%;
+         height:100%;
+         position:relative;
+	}
         img{
           width: 100%;
           height: auto;
           position: absolute;
-          top: 50%;
+          top: 0;
           left: 0;
           transform:translateY(-50%);
         }

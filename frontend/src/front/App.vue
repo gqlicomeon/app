@@ -41,6 +41,9 @@
                 </aside>
             </section>
         </main>
+        <footer>
+           <p><a target="_blank"  href="http://www.beian.miit.gov.cn/">粤ICP备20018992号-1</a></p>
+        </footer>
     </div>
 </template>
 <script> 
@@ -61,7 +64,7 @@
     computed: {
       styleObj(){
         let banner = this.banner;
-        let url = banner[Math.floor(Math.random()*banner.length)];
+        let url = banner[0];
         return url ? {backgroundImage:`url(${url})`} : {};
       }
     },
@@ -319,4 +322,17 @@
         }
       }
     }
+   footer{	
+     box-shadow: 0 1px 6px rgba(0,0,0,.3);
+     padding:25px 0;
+     p{
+       text-align:center;
+     }
+     a{
+        color:#fff;
+        &:hover{
+          color: #048fa0;;
+        }
+     }
+   }
 </style>

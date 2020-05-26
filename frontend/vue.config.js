@@ -9,11 +9,11 @@ module.exports = {
     productionSourceMap:false,
     pwa:{
         iconPaths:{
-            favicon32: 'icon.ico',
-            favicon16: 'icon.ico',
-            appleTouchIcon: 'icon.ico',
-            maskIcon: 'icon.ico',
-            msTileImage: 'icon.ico'
+            favicon32: '/upload/icon.png',
+            favicon16: '/upload/icon.png',
+            appleTouchIcon: '/upload/icon.png',
+            maskIcon: '/upload/icon.png',
+            msTileImage: '/upload/icon.png'
         }
     },
     pages: {

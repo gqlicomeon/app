@@ -37,7 +37,7 @@ app.use(koaBody({
       maxFieldsSize:2 * 1024 * 1024, // 文件上传大小
       onFileBegin:(name,file) => { // 文件上传前的设置
         //改写上传的文件名
-        let rPath = file.path.replace(/upload_[a-z0-9]+\.\w+/,file.name);
+        let rPath = file.path.replace(/upload_[a-zA-Z0-9-_]+\.(png|jpg|jpeg|gif|bmp|swf)$/i,file.name);
         file.path = rPath;
       }
     }
